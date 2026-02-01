@@ -122,18 +122,24 @@ def apply_update(assets):
 
 
 def delete_old_exe():
-    executable_directory = os.path.dirname(os.path.abspath(sys.argv[0]))
+    exe_to_rename = sys.argv[0]
+    current = os.path.basename(exe_to_rename)
+
+    # Skip if running from Python script
+    if current.endswith(".py") or current == "run.py":
+        return
+
+    # Skip if not an executable
+    if not (current.endswith(".exe") or current.endswith(".AppImage")):
+        return
+
+    executable_directory = os.path.dirname(os.path.abspath(exe_to_rename))
     if sys.platform.startswith("linux"):
         name = "NX Optimizer.AppImage"
     elif sys.platform.startswith("win"):
         name = "NX Optimizer.exe"
     else:
         name = "NX Optimizer.exe"
-    exe_to_rename = sys.argv[0]
-    current = exe_to_rename.split("\\")[-1]
-
-    if current == "run.py":
-        return
 
     for file in os.listdir(executable_directory):
         if file == "NX Optimizer.exe" or file == "NX Optimizer.AppImage":

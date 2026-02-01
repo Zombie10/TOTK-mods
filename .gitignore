@@ -34,3 +34,5 @@ venv
 src/run.dist.zip
 /src/run.dist
 src/TOTKOptimizer.ini
+TOTKOptimizer.ini
+NX Optimizer.AppImage
